@@ -9,4 +9,10 @@ public class MessageConstant {
 
     public static final String CATEGORY_BE_RELATED_BY_SETMEAL = "当前分类关联了套餐,不能删除";
     public static final String CATEGORY_BE_RELATED_BY_DISH = "当前分类关联了菜品,不能删除";
+
+    public static final String DISH_ON_SALE="当前菜品处于起售中，不能删除";
+    public static final String DISH_BE_RELATED_BY_SETMEAL="当前菜品被套餐关联了，不能删除";
+
+
+    public static final String UPLOAD_FAILED = "文件上传失败";
 }
