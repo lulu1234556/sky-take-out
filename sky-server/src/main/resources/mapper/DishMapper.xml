@@ -37,4 +37,21 @@
         </if>
         order by t1.create_time desc
     </select>
+    <select id="listByCategoryAndStatus" resultType="com.sky.entity.Dish">
+        select *
+        from dish
+        <where>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    <select id="countBySetmealIdAndStatus" resultType="java.lang.Integer">
+        select count(d.id)
+        from dish d
+                 left join setmeal_dish sd on d.id = sd.dish_id
+        where sd.setmeal_id = #{setmealId}
+          and d.status = #{status}
+    </select>
 </mapper>

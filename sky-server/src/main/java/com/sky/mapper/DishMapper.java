@@ -7,7 +7,10 @@ import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface DishMapper {
 
@@ -19,6 +22,8 @@ public interface DishMapper {
 
     Page<DishVo> list(DishPageQueryDTO dishPageQueryDTO);
 
+    List<Dish> listByCategoryAndStatus(Dish dish);
+
     @Select("select * from dish where id=#{id}")
     Dish getById(Long id);
 
@@ -27,4 +32,6 @@ public interface DishMapper {
 
     @AutoFill(OperationType.UPDATE)
     void update(Dish dish);
+
+    Integer countBySetmealIdAndStatus(@Param("setmealId")Long id, @Param("status")Integer disable);
 }

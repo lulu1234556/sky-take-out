@@ -15,4 +15,7 @@ public class MessageConstant {
 
 
     public static final String UPLOAD_FAILED = "文件上传失败";
+
+    public static final String SETMEAL_ON_SALE = "套餐起售中，不能删除";
+    public static final String SETMEAL_ENABLE_FAILED = "套餐内包含未启售菜品，无法启售";
 }

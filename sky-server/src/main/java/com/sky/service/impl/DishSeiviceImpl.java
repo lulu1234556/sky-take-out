@@ -11,7 +11,7 @@ import com.sky.entity.DishFlavor;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
-import com.sky.mapper.SetmealDishAMapper;
+import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishSeivice;
 import com.sky.vo.DishVo;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,7 +32,7 @@ public class DishSeiviceImpl implements DishSeivice {
     private DishFlavorMapper dishFlavorMapper;
 
     @Autowired
-    private SetmealDishAMapper setmealDishAMapper;
+    private SetmealDishMapper setmealDishAMapper;
 
     @Override
     public void addDish(DishDTO dishDTO) {
@@ -53,6 +52,15 @@ public class DishSeiviceImpl implements DishSeivice {
         PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
         Page<DishVo> page=dishMapper.list(dishPageQueryDTO);
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.listByCategoryAndStatus(dish);
     }
 
     @Override
