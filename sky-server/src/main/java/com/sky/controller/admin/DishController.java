@@ -5,7 +5,7 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
-import com.sky.service.DishSeivice;
+import com.sky.service.DishService;
 import com.sky.vo.DishVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +22,7 @@ import java.util.List;
 public class DishController {
 
     @Autowired
-    private DishSeivice dishService;
-    @Autowired
-    private DishSeivice dishSeivice;
+    private DishService dishService;
 
     @PostMapping
     @ApiOperation("新增菜品")
@@ -62,7 +60,7 @@ public class DishController {
     @ApiOperation("根据id查询菜品")
     public Result<DishVo> getById(@PathVariable Long id){
         log.info("根据id查询菜品:{}",id);
-        DishVo dishVo=dishSeivice.getById(id);
+        DishVo dishVo= dishService.getById(id);
         return Result.success(dishVo);
     }
 

@@ -13,17 +13,19 @@ import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
-import com.sky.service.DishSeivice;
+import com.sky.service.CategoryService;
+import com.sky.service.DishService;
 import com.sky.vo.DishVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DishSeiviceImpl implements DishSeivice {
+public class DishServiceImpl implements DishService {
 
     @Autowired
     private DishMapper dishMapper;
@@ -33,6 +35,8 @@ public class DishSeiviceImpl implements DishSeivice {
 
     @Autowired
     private SetmealDishMapper setmealDishAMapper;
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     public void addDish(DishDTO dishDTO) {
@@ -121,5 +125,19 @@ public class DishSeiviceImpl implements DishSeivice {
                 .status(status)
                 .build();
         dishMapper.update(dish);
+    }
+
+    @Override
+    public List<DishVo> listWithFalvor(Dish dish) {
+        List<Dish> list=dishMapper.listByCategoryAndStatus(dish);
+        List<DishVo> dishVoList=new ArrayList<>();
+        for(Dish d:list){
+            DishVo dishVo=new DishVo();
+            BeanUtils.copyProperties(d,dishVo);
+            List<DishFlavor> flavors=dishFlavorMapper.getById(d.getId());
+            dishVo.setFlavors(flavors);
+            dishVoList.add(dishVo);
+        }
+        return dishVoList;
     }
 }
