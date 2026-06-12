@@ -18,6 +18,7 @@ import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     public void addSetmeal(SetmealDTO setmealDTO) {
         Setmeal setmeal=new Setmeal();
         BeanUtils.copyProperties(setmealDTO,setmeal);
@@ -60,6 +62,7 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     public void delete(List<Long> ids) {
         //setmeal中菜品删除，对应setmeal中数据也应该删除
         for(Long id:ids){
@@ -82,6 +85,7 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Override
     @Transactional
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     public void update(SetmealDTO setmealDTO) {
         Setmeal setmeal=new Setmeal();
         BeanUtils.copyProperties(setmealDTO,setmeal);
@@ -98,6 +102,7 @@ public class SetmealServiceImpl implements SetmealService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "setmeal", allEntries = true)
     public void startOrStop(Integer status, Long id) {
         if (status == StatusConstant.ENABLE) {
             Integer count = dishMapper.countBySetmealIdAndStatus(id, StatusConstant.DISABLE);
