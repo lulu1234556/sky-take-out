@@ -45,7 +45,7 @@ public class AddressBookController {
         addressBook.setUserId(BaseContext.getCurrentId());
         addressBook.setIsDefault(1);
         List<AddressBook> addressBookList=addressBookService.list(addressBook);
-        if(addressBookList!=null){
+        if(addressBookList!=null && addressBookList.size()>0){
             AddressBook item=addressBookList.get(0);
             return Result.success(item);
         }
