@@ -14,4 +14,7 @@ public interface OrdersMapper {
     Orders getById(Long id);
 
     void update(Orders order);
+
+    @Select("select count(id) from orders where status = #{status}")
+    Integer countStatus(Integer status);
 }

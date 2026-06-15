@@ -14,27 +14,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Orders implements Serializable {
-
-    // 订单状态：待付款
+    // order status: pending payment
     public static final Integer PENDING_PAYMENT = 1;
-    // 订单状态：待接单
+    // order status: to be confirmed
     public static final Integer TO_BE_CONFIRMED = 2;
-    // 订单状态：已接单
+    // order status: confirmed
     public static final Integer CONFIRMED = 3;
-    // 订单状态：派送中
+    // order status: delivery in progress
     public static final Integer DELIVERY_IN_PROGRESS = 4;
-    // 订单状态：已完成
+    // order status: completed
     public static final Integer COMPLETED = 5;
-    // 订单状态：已取消
+    // order status: cancelled
     public static final Integer CANCELLED = 6;
 
-    // 支付状态：未支付
+    // pay status: unpaid
     public static final Integer UN_PAID = 0;
-    // 支付状态：已支付
+    // pay status: paid
     public static final Integer PAID = 1;
-    // 支付状态：退款
+    // pay status: refund
     public static final Integer REFUND = 2;
-
     private Long id;
 
     private String number;
