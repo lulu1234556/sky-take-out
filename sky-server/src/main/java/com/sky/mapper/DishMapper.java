@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DishMapper {
 
@@ -34,4 +35,6 @@ public interface DishMapper {
     void update(Dish dish);
 
     Integer countBySetmealIdAndStatus(@Param("setmealId")Long id, @Param("status")Integer disable);
+
+    Integer countByMap(Map map);
 }
